@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 BundyProject
 ============
 
@@ -9,3 +10,9 @@ MLP4bundy
 
 This repository contains MLP programs for the bundy project.
 >>>>>>> f59af87f458da5f83147f903c9ce6705725b5d61
+=======
+BundyMLP
+========
+
+Contains the MLP programming for Bundy Project.
+>>>>>>> b6bcf3114ddae5d3b3c93e4dff523f27bbd6ebb4
