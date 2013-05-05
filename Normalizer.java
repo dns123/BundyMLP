@@ -260,6 +260,13 @@ public class Normalizer {
 			}
 		}
 		
+		/* For normalization we have L: R(x values) to [-1,1] (y values) given by
+		(x-x1)/(x2-x1)=(y-y1)/(y2-y1)=k    ;  where x1=pmin,x2=pmax, y1=-1, y2=1
+		i.e.  (x-pmin)/(pmax-pmin)=(y-(-1))/(1-(-1))=1(value of k=1)
+		i.e. (x-pmin)/(pmax-pmin)=(y+1)/2=1
+		i.e. y = [2 * ((x-pmin)/(pmax-pmin))] - 1 ; used to define normInputs
+		*/
+		
 		normOutputs = new double [numberofPatterns] [numberofOutputs];
 		for (int i=0; i<numberofPatterns; i++) {
 			for (int j=0; j<numberofOutputs; j++) {
