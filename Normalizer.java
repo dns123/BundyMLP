@@ -130,25 +130,40 @@ public class Normalizer {
 		FileWriter fw = new FileWriter( testFileName);
 		PrintWriter testw = new PrintWriter( fw);
 		fw = new FileWriter( trainFileName);
-		PrintWriter trainw = new PrintWriter( fw);		
+		PrintWriter trainw = new PrintWriter( fw);
+		
+		/*  Once we get the normalized the data, some percentage of it is used for training and rest for 
+		testing.  But the patterns after the normalization should be distributed among test set and training
+		set randomly. 
+		*/
 		
 		Vector<Integer> moved = new Vector<Integer>() ;
-		int np = 0 ;
+		int np = 0 ;  
 		String s = numberofInputs+" "+ numberofOutputs+" "+ numberOfTestPatterns;
 		testw.println(s);
 		while (np < numberOfTestPatterns ) {
+			
+			// Suppose we have to divide the normailised data in 80:20 ratio for training and testing.
+			/* Then we will randomly select 20 percent of total patterns and put them into test set
+			and the rest of them will be part of train set.
+			*/
+			
+			// a random number is generated.
 			int rp =(int) Math.round( Math.random() * numberOfPatterns );
 			if( rp >= numberOfPatterns) 
 			continue;
+			/* we will continue generating the random number unless and untill it is not less than 
+			numberOfPatterns  and when we get such pattern number, we will place that particular
+			pattern in the test set.*/
 			//System.out.println("*&^%***************** "+rp);
-			if ( ! ( moved.contains ( rp ) )) {
-				moved.add(rp) ;
+			if ( ! ( moved.contains ( rp ) )) {   // if moved vector does not contain rp then take the pattern number rp in the test set.
+				moved.add(rp) ;   // the pattern number which has been included in the test data is stored in the vector called moved.
 				patternString = patterns.get(rp); 
 				testw.println(patternString);
 				np ++ ;
 			}
 		}
-
+		// and now the rest of the patterns will be the part of the train set.
 		s = numberofInputs+" "+ numberofOutputs+" "+ numberOfTrainPatterns;
 		trainw.println(s);
 		for( int p=0; p < numberOfPatterns; p ++ ) {
@@ -192,7 +207,7 @@ public class Normalizer {
 		return repat;
 	}
 	
-	
+	// minmax () returns the minimum and maximum values within the array.
 	public void minmax() {
 		double inmin,inmax,outmin,outmax;
 		inmin = inmax = inputs [0][0];
@@ -219,6 +234,7 @@ public class Normalizer {
 				
 	}
 	
+	// this method stores the minimum and maximum values of array in array called npm.
 	public double[] getNormalizationParameters() {
 		double [] npm = new double[4];
 		npm[0]=inMin;
@@ -231,7 +247,7 @@ public class Normalizer {
 
 	
 	public void normalize() {
-		minmax();
+		minmax(); // returns the minimum and the maximum values in the array.
 		double pmax = inMax ;
 		double pmin = inMin ;
 		double xmax = outMax ;
