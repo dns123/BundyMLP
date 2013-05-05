@@ -1,7 +1,24 @@
+/*   This program is used to normalize the given data as to employ MLP, we require the input within
+the range [-1,1] (because it is the domain of the activation function used in Neuron.java).
+It contains mainly two functions called normalize () and remap(), both use linear map (a line passing 
+through two points given by (x-x1)/(x2-x1)=(y-y1)/(y2-y1)=l ) to serve the purpose.
+In normalize(), the map L : R to [-1,1] given by the above definition; where for a value x in R (i.e. data)
+we have to find corresponding point y in [-1,1]. x1,x2,y1,y2 are min and max values for both x and y respectively.
+In remap(), the map K : [-1,] to R given by the above definition; where for a value y in [-1,1] (i.e. computed data)
+we have to find the corresponding value of x in R (i.e. computed value remapped to original scale).
+This program also have the capability to divide the normalised patterns in to training and testing data set through the
+method called dividePatterns(). So at the end of the execution of this program we will have 2 files, one with the 
+normalised data to be used as training data set and the other one as normalised data to be used as testing data set.
+*/
+
+
+
+
 import java.io.*;
 import java.util.Scanner;
 import java.util.Vector;
 public class Normalizer {
+	//datatypes to be used should be defined initially.
 	private double [][] bundyData;
 	private double [][] normalData;
 	private double [][] remapData;
@@ -15,8 +32,10 @@ public class Normalizer {
 	private double [][] outputs;
 	private double [][] normInputs;
 	private double [][] normOutputs;
-	//private double[] baseCoordinates;
+	//private double[] baseCoordinates;   ---NOT required in BundyProject but was useful in Apollo Project.
 	
+	
+	// constructor 
 	public Normalizer (int ni, int no, int np) {
 		numberofInputs = ni;
 		numberofOutputs = no;
@@ -27,6 +46,7 @@ public class Normalizer {
 		//baseCoordinates = new double[numberofInputs];
 	}
 	
+	// consturctor which will also read the file which contains the data to be normalize.
 	public Normalizer (String dataFile) throws IOException {
 		System.out.println("Reading data from "+dataFile);
 		Scanner sc = new Scanner(new File(dataFile));
@@ -53,10 +73,13 @@ public class Normalizer {
 		}		
 	}
 
+	// default constructor
 	public Normalizer () {
 		this (17,1,153);
 	}
-
+	
+	
+	// additional method to read the data if one don't want to use the constructor in specific cases.
 	public void readData () throws IOException  {
 		String dataFile = "data.txt";
 		System.out.println("Reading data from "+dataFile);
@@ -75,6 +98,7 @@ public class Normalizer {
 		}
 	}
 	
+	//method to divide the patterns in to testing and training data set
 	public void dividePatterns(String patFileName, int testPercent ) throws IOException {
  	    	if ( testPercent < 10 || testPercent > 50 ) {
  	    		testPercent = 20 ;
@@ -84,6 +108,12 @@ public class Normalizer {
 		System.out.println(testPercent+ " % of patterns to be moved to file  "+testFileName+ " remaining to "+trainFileName) ;
 		FileReader fr = new FileReader( patFileName);
 		BufferedReader br = new BufferedReader( fr);
+		
+	/* Here the number of patterns in the file may not be known so how to initialize the matrix which can store the
+	data in the file. To over come that we have used a data type called Vector which does not require the 
+	size of the data to be initiated. !!!!!  So it will read the file line by line as String object and add
+	it to the Vector patterns as shown below.	*/
+	
 		Vector <String> patterns = new Vector <String>() ;
 		String patternString = br.readLine() ;
 		while ( patternString != null ) {
