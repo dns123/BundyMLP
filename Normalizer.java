@@ -265,6 +265,10 @@ public class Normalizer {
 		i.e.  (x-pmin)/(pmax-pmin)=(y-(-1))/(1-(-1))=1(value of k=1)
 		i.e. (x-pmin)/(pmax-pmin)=(y+1)/2=1
 		i.e. y = [2 * ((x-pmin)/(pmax-pmin))] - 1 ; used to define normInputs
+		
+		
+		Simillarly one can workout the other map K : [-1,1](x values) to R(y values).
+		one should get  x = [2 * ((y-xmin)/(xmax-xmin))] - 1 
 		*/
 		
 		normOutputs = new double [numberofPatterns] [numberofOutputs];
