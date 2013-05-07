@@ -27,7 +27,7 @@ public class Normalizer {
 	private int numberofPatterns;
 	private int numberOfTestPatterns;
 	private int numberOfTrainPatterns;	
-	private double inMin, inMax, outMin, outMax;
+	private double inMin, inMax, outMin, outMax;  
 	private double [][] inputs;
 	private double [][] outputs;
 	private double [][] normInputs;
