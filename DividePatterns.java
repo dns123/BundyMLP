@@ -1,3 +1,10 @@
+/*  This program was created to have an utility which can divide the number of patterns in two files, One called the train
+set which includes the patterns to be used for training and the other one called test set which includes the patterns
+to be used for testing.
+*/
+
+
+
 import java.io.*;
 import java.util.Scanner;
 import java.util.Vector;
@@ -23,6 +30,10 @@ public class DividePatterns {
 		FileReader fr = new FileReader( patFileName);
 		BufferedReader br = new BufferedReader( fr);
 		Vector <String> patterns = new Vector <String>() ;
+		/* Here the number of patterns in the file may not be known so how to initialize the matrix which can store the
+	data in the file. To over come that we have used a data type called Vector which does not require the 
+	size of the data to be initiated. !!!!!  So it will read the file line by line as String object and add
+	it to the Vector patterns as shown below.	*/
 		String patternString = br.readLine() ;
 		while ( patternString != null ) {
 			patterns.add( patternString ) ;
@@ -42,6 +53,14 @@ public class DividePatterns {
 		Vector<Integer> moved = new Vector<Integer>() ;
 		int np = 0 ;
 		while (np < numberOfTestPatterns ) {
+			
+			// Suppose we have to divide the normailised data in 80:20 ratio for training and testing.
+			/* Then we will randomly select 20 percent of total patterns and put them into test set
+			and the rest of them will be part of train set.
+			*/
+
+			// a random number is generated.
+			
 			int rp =(int) Math.round( Math.random() * numberOfPatterns );
 			if ( ! ( moved.contains ( rp ) )) {
 				moved.add(rp) ;
