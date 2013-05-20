@@ -5,9 +5,11 @@ different methods for training of the network.*/
 
 
 
-import java.util.Scanner;
-import java.io.*;
+import java.util.Scanner;	// To use the objects of the scanner classs to read data from command prompt or file.
+import java.io.*;               // To use the objects of the .io class which can be used to print the output in command prompt.    
 public class Neuron {
+	
+	// Data types used in the program
 	private int numberOfInputs ;
 	private int numberOfPatterns;
 	private double[][] patterns;
@@ -18,7 +20,7 @@ public class Neuron {
 	private double learningRate;
 	private String label;
 
-	public Neuron(int ni, int np, double lr, String lbl) {
+	public Neuron(int ni, int np, double lr, String lbl) {  // Constructor
 		numberOfInputs = ni;
 		numberOfPatterns = np;
 		patterns = new double[np][ni+1];
@@ -37,11 +39,11 @@ public class Neuron {
 		this(ni,np,0.5,lbl);
 	}
 
-	public Neuron() {
+	public Neuron() {   // Default Constructor
 		this(2,4,"No Name");
 	}
 	
-	public void readNeuron() throws IOException {
+	public void readNeuron() throws IOException {   
 		Scanner sc = new Scanner(new File("netdatabpor.txt"));
 		System.out.println("Reading Perceptron data from netdatabpor.txt");
 		numberOfInputs = sc.nextInt();
@@ -96,32 +98,32 @@ public class Neuron {
 		return learningRate ;
 	}
 
-	public double bipolarLogistic( double x ) {
+	public double bipolarLogistic( double x ) {   // It is an Activation Function
 		double bpl = (1.0 - Math.exp(-x) ) / (1.0 + Math.exp(-x) );
 		return bpl;
 	}
 
-	public double bipolarStep( double x ) {
+	public double bipolarStep( double x ) {  // It is an Activation Function
 		if ( x <= 0.0 ) 
 			return -1.0;
 		else
 			return 1.0;
 	}
 
-	public double binaryStep( double x ) {
+	public double binaryStep( double x ) {   // It is an Activation Function
 		if ( x <= 0.0 ) 
 			return 0.0;
 		else
 			return 1.0;
 	}
 
-	public double bplGradient( double x ) {
+	public double bplGradient( double x ) {   // It is an Activation Function
 		double bpl = bipolarLogistic(x);
 		double bplg = ( 1.0 - bpl * bpl ) / 2.0;
 		return bplg;
 	}
 
-	public double weightedSum (int patn) {
+	public double weightedSum (int patn) {    // Weighted sum for a particular pattern
 		currentInputs[0] = -1.0;
 		for ( int i = 0; i < numberOfInputs ; i ++ ) {
 			currentInputs[i+1] = patterns[patn][i];
@@ -133,7 +135,7 @@ public class Neuron {
 		return sum ;
 	}
 
-	public double weightedSum (double[] inps) {
+	public double weightedSum (double[] inps) {   // Weighted sum for a particular set of inputs
 		double sum =0.0;
 		for ( int i = 0; i <= numberOfInputs ; i ++ ) {
 			sum += weights[i] * inps[i] ;
