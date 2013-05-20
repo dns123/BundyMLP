@@ -1,3 +1,10 @@
+/* This  program replicates the working of a single neuron in any Artificial Neural Network.
+Given the set of inputs for a network to be trained it computes the weighted sum depending upon the output of the activication 
+function.  One Can see different definitions of the activation functions and 
+different methods for training of the network.*/
+
+
+
 import java.util.Scanner;
 import java.io.*;
 public class Neuron {
